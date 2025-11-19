@@ -44,6 +44,9 @@ gui.add(myObject, "myVariable");
 // checkbox control
 gui.add(mesh, "Visible");
 
+// wireframe control
+gui.add(material, "wireframe");
+
 /**
  * Sizes
  */
