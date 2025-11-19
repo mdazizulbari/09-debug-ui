@@ -41,6 +41,9 @@ const myObject = {
 };
 gui.add(myObject, "myVariable");
 
+// checkbox control
+gui.add(mesh, "Visible");
+
 /**
  * Sizes
  */
