@@ -59,6 +59,12 @@ gui.addColor(debugObject, "color").onChange((value) => {
   material.color.set(debugObject.color);
 });
 
+// spin/function button control
+debugObject.spin = () => {
+  gsap.to(mesh.rotation, { y: rotation.y + Math.PI * 2 });
+};
+gui.add(debugObject, "spin");
+
 /**
  * Sizes
  */
