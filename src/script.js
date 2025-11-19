@@ -23,7 +23,23 @@ const material = new THREE.MeshBasicMaterial({ color: "#ff0000" });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
-gui.add(mesh.position, "y", -3, 3, 0.01);
+// range control
+gui
+  .add(mesh.position, "y")
+  //
+  .min(-3)
+  .max(3)
+  .step(0.01)
+  .name("Elevation");
+
+//   doesn't works
+// let myVariable = 1337;
+// gui.add(myVariable, "???");
+// works like this
+const myObject = {
+  myVariable: 1337,
+};
+gui.add(myObject, "myVariable");
 
 /**
  * Sizes
