@@ -47,6 +47,9 @@ gui.add(mesh, "Visible");
 // wireframe control
 gui.add(material, "wireframe");
 
+// color control
+gui.addColor(material, "color");
+
 /**
  * Sizes
  */
