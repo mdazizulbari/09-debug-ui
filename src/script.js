@@ -3,8 +3,11 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import gsap from "gsap";
 import GUI from "lil-gui";
 
-// Debug
+/**
+ * Debug
+ */
 const gui = new GUI();
+const debugObject = {};
 
 /**
  * Base
@@ -18,8 +21,10 @@ const scene = new THREE.Scene();
 /**
  * Object
  */
+debugObject.color = "#3a6ea6";
+
 const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
-const material = new THREE.MeshBasicMaterial({ color: "#ff0000" });
+const material = new THREE.MeshBasicMaterial({ color: debugObject.color });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
@@ -48,7 +53,11 @@ gui.add(mesh, "Visible");
 gui.add(material, "wireframe");
 
 // color control
-gui.addColor(material, "color");
+gui.addColor(debugObject, "color").onChange((value) => {
+  //   console.log(material.color);
+  // console.log(value);
+  material.color.set(debugObject.color);
+});
 
 /**
  * Sizes
