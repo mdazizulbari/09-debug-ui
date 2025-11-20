@@ -31,8 +31,11 @@ const material = new THREE.MeshBasicMaterial({
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
+const cubeTweaks = gui.addFolder("Awesome Cube");
+cubeTweaks.close();
+
 // range control
-gui
+cubeTweaks
   //
   .add(mesh.position, "y")
   .min(-3)
@@ -47,16 +50,16 @@ gui
 const myObject = {
   myVariable: 1337,
 };
-gui.add(myObject, "myVariable");
+cubeTweaks.add(myObject, "myVariable");
 
 // checkbox control
-gui.add(mesh, "visible");
+cubeTweaks.add(mesh, "visible");
 
 // wireframe control
-gui.add(material, "wireframe");
+cubeTweaks.add(material, "wireframe");
 
 // color control
-gui.addColor(debugObject, "color").onChange((value) => {
+cubeTweaks.addColor(debugObject, "color").onChange((value) => {
   //   console.log(material.color);
   // console.log(value);
   material.color.set(debugObject.color);
@@ -66,13 +69,13 @@ gui.addColor(debugObject, "color").onChange((value) => {
 debugObject.spin = () => {
   gsap.to(mesh.rotation, { y: mesh.rotation.y + Math.PI * 2 });
 };
-gui.add(debugObject, "spin");
+cubeTweaks.add(debugObject, "spin");
 
 // subdivision control
 // doesn't work
 // gui.add(geometry,"widthSegments")
 debugObject.subdivision = 2;
-gui
+cubeTweaks
   //
   .add(debugObject, "subdivision")
   .min(1)
