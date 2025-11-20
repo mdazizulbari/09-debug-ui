@@ -24,14 +24,17 @@ const scene = new THREE.Scene();
 debugObject.color = "#3a6ea6";
 
 const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
-const material = new THREE.MeshBasicMaterial({ color: debugObject.color });
+const material = new THREE.MeshBasicMaterial({
+  color: debugObject.color,
+  wireframe: true,
+});
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
 // range control
 gui
-  .add(mesh.position, "y")
   //
+  .add(mesh.position, "y")
   .min(-3)
   .max(3)
   .step(0.01)
@@ -47,7 +50,7 @@ const myObject = {
 gui.add(myObject, "myVariable");
 
 // checkbox control
-gui.add(mesh, "Visible");
+gui.add(mesh, "visible");
 
 // wireframe control
 gui.add(material, "wireframe");
@@ -64,6 +67,29 @@ debugObject.spin = () => {
   gsap.to(mesh.rotation, { y: mesh.rotation.y + Math.PI * 2 });
 };
 gui.add(debugObject, "spin");
+
+// subdivision control
+// doesn't work
+// gui.add(geometry,"widthSegments")
+debugObject.subdivision = 2;
+gui
+  //
+  .add(debugObject, "subdivision")
+  .min(1)
+  .max(20)
+  .step(1)
+  .onFinishChange(() => {
+    // console.log("finished");
+    mesh.geometry.dispose();
+    mesh.geometry = new THREE.BoxGeometry(
+      1,
+      1,
+      1,
+      debugObject.subdivision,
+      debugObject.subdivision,
+      debugObject.subdivision
+    );
+  });
 
 /**
  * Sizes
